@@ -3,25 +3,41 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --default-text-size: 15px;
+
+  --default-foreground: #1d2025;
+  --default-background: #f7f8fd;
+
+  --accent-primary: hsl(26, 100%, 55%);
+  --accent-secondary: hsl(25, 100%, 94%);
+
+  --neutral-dark: hsl(220, 13%, 13%);
+  --neutral-normal: hsl(219, 9%, 45%);
+  --neutral-light: hsl(220, 14%, 75%);
+  --neutral-lighter: hsl(223, 64%, 98%);
+
+  --debug: #ff00dd1f;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --default-foreground: #ffffff;
+    --default-background: #000000;
   }
-}
+} */
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--default-foreground);
+  /* background-color: var(--default-background); */
+  font-size: var(--default-text-size);
+}
+
+.remove-arrow::-webkit-inner-spin-button,
+.remove-arrow::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.remove-arrow {
+  -moz-appearance: textfield;
 }
