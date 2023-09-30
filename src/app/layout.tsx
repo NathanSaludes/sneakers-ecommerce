@@ -12,8 +12,8 @@ const kumbhSans = Kumbh_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "Sneakers",
-  description: 'A FrontendMentor Challenege: E-Commerce Product Page "Sneakers"',
+  title: "Sneakers | Frontend Mentor Challenge",
+  description: 'A FrontendMentor Challenge: E-Commerce Product Page "Sneakers"',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
