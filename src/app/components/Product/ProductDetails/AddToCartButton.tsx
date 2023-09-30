@@ -1,18 +1,42 @@
 "use client"
+import { useToast } from "@/components/ui/use-toast"
+import { useCart } from "@/contexts/Cart"
 import { useCartItem } from "@/contexts/CartItem"
+import { Product } from "@/lib/fetchProduct"
 
 interface ButtonProps {
+  product: Product
   children?: React.ReactNode
 }
-export const Button = ({ children }: ButtonProps) => {
-  const { quantity } = useCartItem()
+export const AddToCartButton = ({ product, children }: ButtonProps) => {
+  const { addItem } = useCart()
+  const { quantity, reset } = useCartItem()
+  const { toast } = useToast()
+
+  const { label, displayPrice, images, productCode } = product.data
+
+  const addItemHandler = () => {
+    addItem({
+      id: productCode,
+      imageUrl: images[0],
+      label,
+      price: displayPrice,
+      quantity,
+    })
+    reset()
+    toast({
+      title: `You added ${quantity} new ${quantity > 1 ? "items" : "item"} in your cart!`,
+      description: label,
+    })
+  }
 
   return (
     <button
       type="button"
       disabled={quantity === 0}
+      onClick={addItemHandler}
       id="addToCartButton"
-      className="text-accent-secondary bg-accent-primary group flex h-[3.2rem] min-w-max grow flex-wrap items-center justify-center gap-4 rounded-lg px-8 font-semibold transition duration-200 ease-in-out hover:shadow-lg hover:shadow-[#ff7d1a6e] disabled:opacity-30 disabled:shadow-none min-[425px]:max-w-max"
+      className="group flex h-[3.2rem] min-w-max grow flex-wrap items-center justify-center gap-4 rounded-lg bg-accent-primary px-8 font-semibold text-accent-secondary transition duration-200 ease-in-out hover:shadow-lg hover:shadow-[#ff7d1a6e] disabled:opacity-30 disabled:shadow-none min-[425px]:max-w-max"
     >
       <i className="inline-flex aspect-square min-w-max max-w-max items-center justify-center">
         <svg width="22" height="20" xmlns="http://www.w3.org/2000/svg" className="fill-accent-secondary">

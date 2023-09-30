@@ -1,12 +1,13 @@
 "use client"
 
-import { ReactNode, RefObject, createContext, useCallback, useContext, useEffect, useRef, useState } from "react"
+import { ReactNode, RefObject, createContext, useCallback, useContext, useEffect, useReducer, useRef, useState } from "react"
 
 interface ICartItem {
   quantity: number
   quantityText: string
   increaseQuantity: () => void
   decreaseQuantity: () => void
+  reset: () => void
   updateText: (q: string) => void
   updateQuantity: () => void
 }
@@ -34,8 +35,13 @@ export const CartItemProvider = ({ children }: CartItemProviderProps) => {
   }, [])
 
   const updateQuantity = useCallback(() => {
-    const parsed = parseInt(quantityText)
-    const updatedValue = isNaN(parsed) || parsed < 0 ? 0 : parsed
+    const parsedValue = parseInt(quantityText)
+    /* 
+      Set the next value to 0 if the input qualifies as the following:
+      (1) not a number, or
+      (2) is a negative number 
+    */
+    const updatedValue = isNaN(parsedValue) || parsedValue < 0 ? 0 : parsedValue
 
     setQuantity(updatedValue)
     setQuantityText(updatedValue.toString())
@@ -43,6 +49,11 @@ export const CartItemProvider = ({ children }: CartItemProviderProps) => {
 
   const updateText = useCallback((value: string) => {
     setQuantityText(value)
+  }, [])
+
+  const resetQuantity = useCallback(() => {
+    setQuantity(0)
+    setQuantityText("0")
   }, [])
 
   return (
@@ -54,6 +65,7 @@ export const CartItemProvider = ({ children }: CartItemProviderProps) => {
         updateQuantity,
         increaseQuantity,
         decreaseQuantity,
+        reset: resetQuantity,
       }}
     >
       {children}
@@ -66,7 +78,7 @@ export const useCartItem = () => {
 
   if (!cartItemContext) {
     throw new Error(
-      `"useCartItem()" hook should only be used in components that is wrapped within the '<CartItemProvider />'`,
+      `"useCartItem()" hook should only be used in components that are wrapped within the '<CartItemProvider />'`,
     )
   }
 
