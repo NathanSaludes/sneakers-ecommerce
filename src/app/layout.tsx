@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={cn(
           kumbhSans.className,
-          "relative min-h-screen selection:bg-accent-primary selection:text-accent-secondary",
+          "relative flex min-h-screen flex-col selection:bg-accent-primary selection:text-accent-secondary",
         )}
       >
         {children}

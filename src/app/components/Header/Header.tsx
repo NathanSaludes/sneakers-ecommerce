@@ -3,7 +3,7 @@ import Logo from "@/public/images/logo.svg"
 import Image from "next/image"
 import { AvatarButton } from "../Avatar"
 import { Nav } from "../Nav"
-import { CartButton } from "./CartButton"
+import { CartButton } from "./Cart"
 
 export const Header = () => {
   return (

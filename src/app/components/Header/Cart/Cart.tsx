@@ -6,7 +6,7 @@ export const Cart = () => {
   const { items, removeItem } = useCart()
 
   return (
-    <div className="mx-4 w-full max-w-sm overflow-hidden rounded-2xl bg-white shadow-xl outline outline-1 outline-black/5 sm:m-0 sm:min-w-[360px]">
+    <div className="mx-4 min-w-[346.453px] max-w-sm overflow-hidden rounded-2xl bg-white shadow-xl outline outline-1 outline-black/5 sm:m-0 sm:min-w-[360px]">
       <div id="cart-header" className="border-b p-4 shadow-sm">
         <p className="select-none text-lg font-bold">Cart</p>
       </div>

@@ -5,13 +5,8 @@ interface Props {
 }
 export const GalleryItem = ({ image }: Props) => {
   return (
-    <Image
-      src={image.url}
-      width={70}
-      height={70}
-      alt={image.url}
-      className="flex aspect-square shrink-0 grow items-center justify-center rounded-xl bg-neutral-200"
-      key={image.url}
-    />
+    <button className="relative flex aspect-square shrink-0 grow items-center justify-center overflow-hidden rounded-xl bg-neutral-200 hover:opacity-80">
+      <Image src={image.url} fill alt={image.url} key={image.url} />
+    </button>
   )
 }
